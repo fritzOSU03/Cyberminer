@@ -6,14 +6,15 @@ import java.util.Arrays;
  * AlphaShift.java
  * 
  * @author James
- * Date: July 23rd, 2020
+ * Date: July 27rd, 2020
  */
 public class AlphaShift {
 	private IndexStorage indexes = null;
-	private String[] noiseWords = {"a", "an", "and", "at", "by", "for", "of", "or", "the", "to"};
+	private final String[] noiseWords = {"a", "an", "and", "at", "by", "for", "of", "or", "the", "to"};
 	
 	/**
 	 * @param indexes		This is an IndexStorage object that is to be alphabetically sorted.
+     * @return              Returns a boolean that is true on success, else false.
 	 */
 	public boolean alpha(IndexStorage indexes) {
 		try {
@@ -31,7 +32,8 @@ public class AlphaShift {
 			
 			//Once sorted, add each index to the database.
 			for(Index idx : this.indexes.indexes) {
-				if(!isNoiseWord(idx.getKeyword().toLowerCase())) idx.addIndex();
+				if(!Arrays.asList(noiseWords).contains(idx.getKeyword().toLowerCase()))
+                    idx.addIndex();
 			}
 			
 			//Clear IndexStorage once the current URL indexes are added.
@@ -39,10 +41,7 @@ public class AlphaShift {
 			
 			return true;
 		}
-		catch(Exception e) {return false;}
-	}
-	
-	private boolean isNoiseWord(String word) {
-		return Arrays.asList(noiseWords).contains(word);
+		catch(Exception e) {e.printStackTrace();}
+        return false;
 	}
 }

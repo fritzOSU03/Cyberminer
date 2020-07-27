@@ -8,7 +8,7 @@ import com.cyberminer.url.Url;
  * CircularShift.java
  * 
  * @author James
- * Date: July 23rd, 2020
+ * Date: July 27th, 2020
  */
 public class CircularShift {
 	private IndexStorage indexes;
@@ -16,6 +16,7 @@ public class CircularShift {
 	/**
 	 * @param url		This is a Url object containing the original url, description, hits, and paid.
 	 * @param indexes	This is an IndexStorage object containing the indexes of the circularly shifted lines.
+     * @return          Returns a boolean that is true on success, else false.
 	 */
 	public boolean shift(Url url, IndexStorage indexes) {
 		this.indexes = indexes;
@@ -32,18 +33,9 @@ public class CircularShift {
 		
 		for(int i = 0; i < wordIdx.size() - 1; i++) {
 			String word = url.getDesc().substring(wordIdx.get(i), wordIdx.get(i + 1) - (i == wordIdx.size() - 2 ? 0 : 1));
-			addNewKeyword(url.getId(), wordIdx.get(i) + 1, word);
+			indexes.add(url.getId(), wordIdx.get(i) + 1, word);
 		}
 		
 		return Kwic.alphaShift.alpha(this.indexes);
-	}
-	
-	/**
-	 * @param urlId	This is an int representing the position of the line in LineStorage.
-	 * @param wordPos	This is an int representing the position of the word in the line in LineStorage.
-	 * @param word		This is a String containing the word to be stored in the IndexStorage record.
-	 */
-	private void addNewKeyword(int urlId, int wordPos, String word) {
-		indexes.add(urlId, wordPos, word);
 	}
 }

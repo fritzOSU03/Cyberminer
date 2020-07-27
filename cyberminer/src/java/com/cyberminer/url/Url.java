@@ -6,7 +6,7 @@ import com.cyberminer.dao.UrlConnectionService;
  * Url.java
  * 
  * @author James
- * Date: July 24th, 2020
+ * Date: July 27th, 2020
  */
 public class Url {
 	private int id;
@@ -59,7 +59,7 @@ public class Url {
 	}
 	
 	protected void setId(int id)		{this.id = id;}
-	private void setUrl(String url)		{this.url = new String (url);}
+	private void setUrl(String url)		{this.url = new String(url);}
 	private void setDesc(String desc)	{this.desc = new String(desc);}
 	private void setHits(int hits)		{this.hits = hits;}
 	private void setPaid(boolean paid)	{this.paid = paid;}
@@ -77,7 +77,8 @@ public class Url {
 		catch(Exception e) {e.printStackTrace(); setId(-1);}
 	}
 	
-	public String toString() {
+	@Override
+    public String toString() {
 		String s = String.format("URL ID: %d\nURL: %s\nDescription: %s\nURL Hits: %d\nSubscriber: %s", getId(), getUrl(), getDesc(), getHits(), getPaid() ? "yes" : "no");
 		return s;
 	}

@@ -11,7 +11,7 @@ import com.cyberminer.url.Url;
  * UrlConnectionService.java
  * 
  * @author James
- * Date: July 24th, 2020
+ * Date: July 27th, 2020
  */
 public class UrlConnectionService implements UrlConnectionDao {
 	
@@ -84,25 +84,6 @@ public class UrlConnectionService implements UrlConnectionDao {
 		catch(NullPointerException e)	{e.printStackTrace(); return false;}
 		catch(Exception e)				{e.printStackTrace(); return false;}
 		return true;
-	}
-	
-	
-	/**
-	 * @return	Returns an ArrayList<Url> containing all of the Url objects
-	 * 			contained within the database. Use of this function is for testing
-	 * 			purposes only and is not recommended.
-	 */
-	@Override
-	public ArrayList<Url> getAllUrls() {
-		ArrayList<Url> results = null;
-		
-		try(	Connection con = UrlConnectionManager.getConnection();
-				PreparedStatement pStmt = con.prepareStatement("call " + DB_NAME + ".GetResults()")) {
-			results = UrlConnectionManager.executeUrlStoredProcedure(con, pStmt);
-		}
-		catch(NullPointerException e)	{e.printStackTrace();}
-		catch(Exception e)				{e.printStackTrace();}
-		return results;
 	}
 	
 	

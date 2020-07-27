@@ -8,7 +8,7 @@ import com.cyberminer.url.Url;
  * UrlConnectionDao.java
  * 
  * @author James
- * Date: July 24th, 2020
+ * Date: July 27th, 2020
  */
 public interface UrlConnectionDao {
 	
@@ -32,13 +32,6 @@ public interface UrlConnectionDao {
 	 * @return		Returns a boolean that is true on success, else false.
 	 */
 	public boolean deleteUrl(int urlId);
-	
-	/**
-	 * @return	Returns an ArrayList<Url> containing all of the Url objects
-	 * 			contained within the database. Use of this function is for testing
-	 * 			purposes only and is not recommended.
-	 */
-	public ArrayList<Url> getAllUrls();
 	
 	/**
 	 * @param search	This is a String containing a comma-separated list of

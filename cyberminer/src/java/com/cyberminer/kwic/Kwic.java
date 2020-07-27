@@ -9,7 +9,7 @@ import com.cyberminer.url.Url;
  * Kwic.java
  * 
  * @author James
- * Date: July 24th, 2020
+ * Date: July 27th, 2020
  */
 public class Kwic {
 	
@@ -35,18 +35,20 @@ public class Kwic {
 	 * @param url			This is a String object representing the url hyperlink address.
 	 * @param description	This is a String object representing the url description.
 	 * @param isPaid		This is a Boolean object used to identify the url as paid.
+     * @return              Returns a boolean that is true on success, else false.
 	 */
-	public void addUrl(String url, String description, boolean isPaid) {
+	public boolean addUrl(String url, String description, boolean isPaid) {
 		try {
 			if(!url.equals("") && !description.equals("")) {
 				//Create the url object.
 				Url u = new Url(url, description.trim(), isPaid);
 				
 				//Call circular shift on the url object.
-				cirShift.shift(u, indexStorage);
+				return cirShift.shift(u, indexStorage);
 			}
 		}
 		catch(Exception e) {e.printStackTrace();}
+        return false;
 	}
 	
 	
