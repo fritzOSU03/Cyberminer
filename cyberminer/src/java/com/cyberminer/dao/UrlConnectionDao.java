@@ -42,6 +42,25 @@ public interface UrlConnectionDao {
 	public ArrayList<Url> getResults(String search);
 	
 	/**
+	 * @param search        This is a String containing a comma-separated list of
+	 *                      terms to be included in the search.
+     * @param startRow      This is an int representing the starting record number of
+     *                      the results being returned. This should be a multiple of
+     *                      numResults;
+     * @param numResults    This is an int representing the number of results
+     *                      being returned from the database.
+     * @param sortOrder     This is an int representing the sort order of the results.
+     *                          1 - urlId
+     *                          2 - urlLink
+     *                          3 - urlDesc
+     *                          4 - hitRate
+     *                          5 - isPaid
+	 * @return              Returns an ArrayList<Url> containing all of the Url objects
+	 *                      matching any of the provided search criteria.
+	 */
+	public ArrayList<Url> getResults(String search, int startRow, int numResults, int sortOrder);
+	
+	/**
 	 * @param term1	This is a String containing the first word that must be found
 	 * 				for a Url to be a successful match.
 	 * @param term2 This is a String containing the second word that must be found
