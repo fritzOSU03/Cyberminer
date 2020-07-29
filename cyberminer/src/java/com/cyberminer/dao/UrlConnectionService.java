@@ -168,6 +168,44 @@ public class UrlConnectionService implements UrlConnectionDao {
 	
 	
 	/**
+	 * @param term1	This is a String containing the first word that must be found
+	 * 				for a Url to be a successful match.
+	 * @param term2 This is a String containing the second word that must be found
+	 * 				for a Url to be a successful match.
+	 * @param startRow      This is an int representing the starting record number of
+     *                      the results being returned. This should be a multiple of
+     *                      numResults;
+     * @param numResults    This is an int representing the number of results
+     *                      being returned from the database.
+     * @param sortOrder     This is an int representing the sort order of the results.
+     *                          1 - urlId
+     *                          2 - urlLink
+     *                          3 - urlDesc
+     *                          4 - hitRate
+     *                          5 - isPaid
+	 * @return		Returns an ArrayList<Url> containing all of the Url objects matching
+	 * 				both of the provided search terms.
+	 */
+	@Override
+	public ArrayList<Url> getAndResults(String term1, String term2, int startRow, int numResults, int sortOrder) {
+		ArrayList<Url> results = null;
+		
+		try(	Connection con = UrlConnectionManager.getConnection();
+				PreparedStatement pStmt = con.prepareStatement("call " + DB_NAME + ".GetAndResultsFilter(?,?,?,?,?)")) {
+			pStmt.setString(1, term1);
+			pStmt.setString(2, term2);
+            pStmt.setInt(3, startRow);
+            pStmt.setInt(4, numResults);
+            pStmt.setInt(5, sortOrder);
+			results = UrlConnectionManager.executeUrlStoredProcedure(con, pStmt);
+		}
+		catch(NullPointerException e)	{e.printStackTrace();}
+		catch(Exception e)				{e.printStackTrace();}
+		return results;
+	}
+    
+    
+    /**
 	 * @param term		This is a String containing a word that must be found for a
 	 * 					Url to be a successful match.
 	 * @param notTerm	This is a String containing a word that must not be found
@@ -183,6 +221,44 @@ public class UrlConnectionService implements UrlConnectionDao {
 				PreparedStatement pStmt = con.prepareStatement("call " + DB_NAME + ".GetNotResults(?,?)")) {
 			pStmt.setString(1, term);
 			pStmt.setString(2, notTerm);
+			results = UrlConnectionManager.executeUrlStoredProcedure(con, pStmt);
+		}
+		catch(NullPointerException e)	{e.printStackTrace();}
+		catch(Exception e)				{e.printStackTrace();}
+		return results;
+	}
+	
+	
+	/**
+	 * @param term		This is a String containing a word that must be found for a
+	 * 					Url to be a successful match.
+	 * @param notTerm	This is a String containing a word that must not be found
+	 * 					for a Url to be a successful match.
+	 * @param startRow      This is an int representing the starting record number of
+     *                      the results being returned. This should be a multiple of
+     *                      numResults;
+     * @param numResults    This is an int representing the number of results
+     *                      being returned from the database.
+     * @param sortOrder     This is an int representing the sort order of the results.
+     *                          1 - urlId
+     *                          2 - urlLink
+     *                          3 - urlDesc
+     *                          4 - hitRate
+     *                          5 - isPaid
+	 * @return			Returns an ArrayList<Url> containing all of the Url objects containing
+	 * 					the first term but not the second term.
+	 */
+	@Override
+	public ArrayList<Url> getNotResults(String term, String notTerm, int startRow, int numResults, int sortOrder) {
+		ArrayList<Url> results = null;
+		
+		try(	Connection con = UrlConnectionManager.getConnection();
+				PreparedStatement pStmt = con.prepareStatement("call " + DB_NAME + ".GetNotResultsFilter(?,?,?,?,?)")) {
+			pStmt.setString(1, term);
+			pStmt.setString(2, notTerm);
+            pStmt.setInt(3, startRow);
+            pStmt.setInt(4, numResults);
+            pStmt.setInt(5, sortOrder);
 			results = UrlConnectionManager.executeUrlStoredProcedure(con, pStmt);
 		}
 		catch(NullPointerException e)	{e.printStackTrace();}
