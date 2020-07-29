@@ -6,6 +6,7 @@
 package com.cyberminer.bean;
 
 import com.cyberminer.ejb.ProgramConnectionEJB;
+import com.cyberminer.url.Url;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -22,7 +23,7 @@ public class DeleteTermBean {
     @EJB
     private ProgramConnectionEJB programConnectionEJB;
     private String searchTerm;
-    private String deleteURL;
+    private int urlId;
     private String result;
     
     public DeleteTermBean() {
@@ -36,12 +37,12 @@ public class DeleteTermBean {
         this.searchTerm = searchTerm;
     }
 
-    public String getDeleteURL() {
-        return deleteURL;
+    public int getUrlId() {
+        return urlId;
     }
 
-    public void setDeleteURL(String deleteURL) {
-        this.deleteURL = deleteURL;
+    public void setUrlId(int urlId) {
+        this.urlId = urlId;
     }
 
     public String getResult() {
@@ -52,12 +53,12 @@ public class DeleteTermBean {
         this.result = result;
     }
     
-    public List<String> getSearchTerms(){
+    public List<Url> getSearchTerms(){
         return programConnectionEJB.getSearchResults(searchTerm);
     }
     
     public void deleteURLFromData(){
-        if(programConnectionEJB.deleteURL(deleteURL)){
+        if(programConnectionEJB.deleteURL(urlId)){
             result = "Successfully deleted the URL from the database";
         } else {
             result = "The URL could not be deleted";

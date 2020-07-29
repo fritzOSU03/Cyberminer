@@ -12,11 +12,11 @@
                 <h:commandButton value="Go Back" action="index.xhtml"></h:commandButton>
             </h:panelGrid>
         </h:form>
-        Here are your search results: <br/>
+        <h4>Here are your search results: </h4><br/>
         <h:form>
             <h:dataTable value="#{searchTermBean.searchResults}" var="o">
                 <h:column>
-                    <h:commandLink value="#{o}" action="#{searchTermBean.redirect(o)}"/>
+                    <h:commandLink value="#{o.url}" action="#{o.url}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

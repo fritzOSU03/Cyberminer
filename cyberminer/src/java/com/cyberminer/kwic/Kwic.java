@@ -60,8 +60,7 @@ public class Kwic {
 	 */
 	public static boolean editUrl(Url updated) {
 		//Remove the existing Url object from the database.
-		UrlConnectionService uSvc = new UrlConnectionService();
-		uSvc.deleteUrl(updated.getId());
+		new UrlConnectionService().deleteUrl(updated.getId());
 		
 		////Call circular shift on the updated url object.
 		return cirShift.shift(updated, indexStorage);

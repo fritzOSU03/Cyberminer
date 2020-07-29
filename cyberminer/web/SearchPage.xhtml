@@ -6,6 +6,16 @@
         <title>Cyberminer - Search</title>
     </h:head>
     <h:body>
+        <h3>Welcome to the search page!<br/></h3>
+        There are three types of searches you can perform:<br/>
+        <b>Basic (OR) search: search for all of the given terms</b><br/>
+        Format: enter the search terms separated by spaces (e.g. "social networking")<br/>
+        <b>AND search: search for terms that contain both the first and second word</b><br/>
+        Format: enter the search words separated by the word AND and spaces (e.g. "social AND networking")<br/>
+        Note: there should be no more than two word this way: the one before AND and the one after<br/>
+        <b>NOT search: search for the links that contain the first word but not the second word</b><br/>
+        Format: enter the search words separated by the word NOT and spaces (e.g. "social NOT networking")<br/>
+        Note: there should be no more than two word this way: the one before NOT and the one after<br/><br/>
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputText value="Enter the search term here: "/>

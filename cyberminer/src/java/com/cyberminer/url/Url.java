@@ -8,7 +8,7 @@ import com.cyberminer.dao.UrlConnectionService;
  * @author James
  * Date: July 27th, 2020
  */
-public class Url {
+public class Url implements Comparable<Url> {
 	private int id;
 	private String url;
 	private String desc;
@@ -78,8 +78,15 @@ public class Url {
 	}
 	
 	@Override
-    public String toString() {
+	public String toString() {
 		String s = String.format("URL ID: %d\nURL: %s\nDescription: %s\nURL Hits: %d\nSubscriber: %s", getId(), getUrl(), getDesc(), getHits(), getPaid() ? "yes" : "no");
 		return s;
+	}
+	
+	@Override
+	public int compareTo(Url other) {
+		if(other.getHits() > getHits())         return -1;
+		else if(other.getHits() < getHits())    return 1;
+		else                                    return 0;
 	}
 }

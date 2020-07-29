@@ -7,21 +7,23 @@
         <title>Cyberminer - Delete Request Results</title>
     </h:head>
     <h:body>
-        <h:panelGrid columns="2">
-            <h:outputText value="Click here to return to the main menu"/>
-            <h:commandButton value="Go Back" action="index.xhtml"></h:commandButton>
-        </h:panelGrid>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="Click here to return to the main menu"/>
+                <h:commandButton value="Go Back" action="index.xhtml"></h:commandButton>
+            </h:panelGrid>
+        </h:form>
         Please select a URL to delete from the list below: <br/>
         <h:outputText value="#{deleteTermBean.result}"/>
         <h:form>
             <h:dataTable value="#{deleteTermBean.searchTerms}" var="o">
                 <h:column>
-                    <h:commandButton value="Delete" action="#{deleteTermBean.setDeleteURL(o)}">
+                    <h:commandButton value="Delete" action="#{deleteTermBean.setUrlId(o.id)}">
                         <f:actionListener binding="#{deleteTermBean.deleteURLFromData()}"/>
                     </h:commandButton>
                 </h:column>
                 <h:column>
-                    <h:outputText value="#{o}"/>
+                    <h:outputText value="#{o.url}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

@@ -7,7 +7,7 @@ package com.cyberminer.ejb;
 
 import com.cyberminer.kwic.*;
 import com.cyberminer.url.*;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -18,32 +18,30 @@ import javax.ejb.Stateless;
 @Stateless
 public class ProgramConnectionEJB {
     
-    public List<String> getSearchResults(String searchTerm) {
-        //Kwic kwic = new Kwic();
-        
-        System.out.println(String.format("Inside: ProgramConnectionEJB.getSearchResults(%s)", searchTerm));
-        List<Url> urls = Kwic.doSearch(searchTerm);
-        List<String> strings = new ArrayList<String>();
-        for(Url url: urls){
-            strings.add(url.getUrl());
-            //strings.add("<a href=\"" + url.getUrl() + "\">" + url.getDesc() + "</a>");
+    public List<Url> getSearchResults(String searchTerm) {
+        List<Url> urls;
+        if(searchTerm.contains("AND")){
+            String s1 = searchTerm.substring(0, searchTerm.indexOf("AND") - 1);
+            String s2 = searchTerm.substring(searchTerm.indexOf("AND") + 2);
+            urls = Kwic.doAndSearch(s1, s2);
+        } else if(searchTerm.contains("NOT")){
+            String s1 = searchTerm.substring(0, searchTerm.indexOf("NOT") - 1);
+            String s2 = searchTerm.substring(searchTerm.indexOf("NOT") + 2);
+            urls = Kwic.doNotSearch(s1, s2);
+        } else {
+            urls = Kwic.doSearch(searchTerm);
         }
-        return strings;
-        
-        /*
-        List<String> test = new ArrayList<String>();
-        test.add("hello");
-        test.add("James");
-        test.add("jack");
-        return test;
-        */
+
+        Collections.sort(urls);
+        Collections.reverse(urls);
+        return urls;
     }
     
     public boolean addSearchTerm(String keyword, String url){
-        return false;
+        return new Kwic().addUrl(url, keyword, false);
     }
     
-    public boolean deleteURL(String url){
-        return false;
+    public boolean deleteURL(int urlId){
+        return Kwic.deleteUrl(urlId);
     }
 }

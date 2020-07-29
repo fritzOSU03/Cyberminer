@@ -17,7 +17,8 @@ public class IndexStorage extends Observable {
 	 * @param urlId		This is an int representing the database index of the Url.
 	 * @param wordPos	This is an int representing the position of the word in the url description.
 	 * @param word		This is a String that contains the keyword to be stored in the Index.
-	 */protected void add(int urlId, int pos, String word) {
+	 */
+    protected void add(int urlId, int pos, String word) {
 		indexes.add(new Index(urlId, pos, word));
 	}
 	

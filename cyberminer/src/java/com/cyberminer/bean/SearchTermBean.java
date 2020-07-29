@@ -6,6 +6,7 @@
 package com.cyberminer.bean;
 
 import com.cyberminer.ejb.ProgramConnectionEJB;
+import com.cyberminer.url.Url;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,7 +34,7 @@ public class SearchTermBean {
     public void setSearchTerm(String searchTerm){
         this.searchTerm = searchTerm;
     }
-    public List<String> getSearchResults(){
+    public List<Url> getSearchResults(){
         //request the list from the ejb using the search term
         return programSeedEJB.getSearchResults(searchTerm);
     }
