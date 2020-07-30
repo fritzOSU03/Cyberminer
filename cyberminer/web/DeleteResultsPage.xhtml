@@ -14,16 +14,19 @@
             </h:panelGrid>
         </h:form>
         Please select a URL to delete from the list below: <br/>
-        <h:outputText value="#{deleteTermBean.result}"/>
+        <b><h:outputText value="#{deleteTermBean.result}"/></b>
         <h:form>
-            <h:dataTable value="#{deleteTermBean.searchTerms}" var="o">
+            <h:dataTable value="#{deleteTermBean.searchResults()}" var="o">
                 <h:column>
-                    <h:commandButton value="Delete" action="#{deleteTermBean.setUrlId(o.id)}">
-                        <f:actionListener binding="#{deleteTermBean.deleteURLFromData()}"/>
+                    <h:commandButton value="Delete" action="#{deleteTermBean.deleteURLFromData()}">
+                        <f:actionListener binding="#{deleteTermBean.setUrlId(o.id)}"/>
                     </h:commandButton>
                 </h:column>
                 <h:column>
                     <h:outputText value="#{o.url}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{o.id}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

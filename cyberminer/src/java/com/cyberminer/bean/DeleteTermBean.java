@@ -7,18 +7,19 @@ package com.cyberminer.bean;
 
 import com.cyberminer.ejb.ProgramConnectionEJB;
 import com.cyberminer.url.Url;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author Zach
  */
 @Named(value = "deleteTermBean")
-@RequestScoped
-public class DeleteTermBean {
+@SessionScoped
+public class DeleteTermBean implements Serializable{
 
     @EJB
     private ProgramConnectionEJB programConnectionEJB;
@@ -53,7 +54,7 @@ public class DeleteTermBean {
         this.result = result;
     }
     
-    public List<Url> getSearchTerms(){
+    public List<Url> searchResults(){
         return programConnectionEJB.getSearchResults(searchTerm);
     }
     

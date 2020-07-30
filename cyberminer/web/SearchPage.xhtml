@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Cyberminer - Search</title>
     </h:head>
@@ -21,6 +22,23 @@
                 <h:outputText value="Enter the search term here: "/>
                 <h:inputText value="#{searchTermBean.searchTerm}"></h:inputText>
                 <h:commandButton value="Search!" action="SearchResultsPage.xhtml"></h:commandButton>
+                <h:outputText value="Enter the number of search results per page here: "/>
+                <h:selectOneMenu value = "#{searchTermBean.pageIncrement}"> 
+                    <f:selectItem itemValue = "3" itemLabel = "3" /> 
+                    <f:selectItem itemValue = "5" itemLabel = "5" />
+                    <f:selectItem itemValue = "10" itemLabel = "10" />
+                    <f:selectItem itemValue = "15" itemLabel = "15" />
+                    <f:selectItem itemValue = "20" itemLabel = "20" />
+                </h:selectOneMenu> 
+            </h:panelGrid>
+            <h:selectOneRadio value="#{searchTermBean.searchType}">
+                <f:selectItem itemValue="5" itemLabel="Sponsored First" />
+                <f:selectItem itemValue="4" itemLabel="Hit Rate of Link"/>
+                <f:selectItem itemValue="1" itemLabel="Database ID Number"/>
+                <f:selectItem itemValue="2" itemLabel="Alphabetic Order of Links"/>
+                <f:selectItem itemValue="3" itemLabel="Alphabetic Order of Descriptions"/>
+            </h:selectOneRadio>
+            <h:panelGrid columns="2">
                 <h:outputText value="Click here to return to the main menu"/>
                 <h:commandButton value="Go Back" action="index.xhtml"></h:commandButton>
             </h:panelGrid>

@@ -13,6 +13,8 @@
                 <h:inputText value="#{addTermBean.keyword}"/>
                 <h:outputText value="Enter the URL here: "/>
                 <h:inputText value="#{addTermBean.url}"/>
+                <h:outputText value="Is this link sponsored?"/>
+                <h:selectBooleanCheckbox value="#{addTermBean.sponsored}"/>
                 <h:commandButton value ="Confirm" action="#{addTermBean.addTerm()}"/>
                 <h:outputText value="#{addTermBean.result}"/>
                 <h:outputText value="Click here to return to the main menu"/>

@@ -19,6 +19,7 @@ public class AddTermBean {
     private String keyword;
     private String url;
     private String result;
+    private boolean sponsored;
     
     public AddTermBean() {
     }
@@ -46,9 +47,17 @@ public class AddTermBean {
     public void setResult(String result) {
         this.result = result;
     }
+
+    public boolean isSponsored() {
+        return sponsored;
+    }
+
+    public void setSponsored(boolean sponsored) {
+        this.sponsored = sponsored;
+    }
     
     public void addTerm(){
-        if(programConnectionEJB.addSearchTerm(keyword, url)){
+        if(programConnectionEJB.addSearchTerm(keyword, url, sponsored)){
             result = "Search term successfully added";
         } else {
             result = "Could not add search term";

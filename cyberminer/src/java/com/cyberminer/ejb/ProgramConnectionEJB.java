@@ -18,27 +18,29 @@ import javax.ejb.Stateless;
 @Stateless
 public class ProgramConnectionEJB {
     
-    public List<Url> getSearchResults(String searchTerm) {
+    public List<Url> getSearchResults(String searchTerm, int start, int end, int type) {
         List<Url> urls;
         if(searchTerm.contains("AND")){
             String s1 = searchTerm.substring(0, searchTerm.indexOf("AND") - 1);
             String s2 = searchTerm.substring(searchTerm.indexOf("AND") + 2);
-            urls = Kwic.doAndSearch(s1, s2);
+            urls = Kwic.doAndSearch(s1, s2, start, end, type);
         } else if(searchTerm.contains("NOT")){
             String s1 = searchTerm.substring(0, searchTerm.indexOf("NOT") - 1);
             String s2 = searchTerm.substring(searchTerm.indexOf("NOT") + 2);
-            urls = Kwic.doNotSearch(s1, s2);
+            urls = Kwic.doNotSearch(s1, s2, start, end, type);
         } else {
-            urls = Kwic.doSearch(searchTerm);
+            urls = Kwic.doSearch(searchTerm, start, end, type);
         }
-
-        Collections.sort(urls);
-        Collections.reverse(urls);
         return urls;
     }
     
-    public boolean addSearchTerm(String keyword, String url){
-        return new Kwic().addUrl(url, keyword, false);
+    public List<Url> getSearchResults(String searchTerm) {
+        List<Url> urls= Kwic.doSearch(searchTerm);
+        return urls;
+    }
+    
+    public boolean addSearchTerm(String keyword, String url, boolean sponsored){
+        return new Kwic().addUrl(url, keyword, sponsored);
     }
     
     public boolean deleteURL(int urlId){
