@@ -18,7 +18,7 @@ import com.cyberminer.url.Url;
  * Date: July 27th, 2020
  */
 public class UrlConnectionManager {
-	private static final String URL_CON = "jdbc:mysql://localhost?user=cmadmin&password=cmpw$1357&useSSL=false";
+	private static final String URL_CON = "jdbc:mysql://localhost?user=cmadmin&password=cmpw$1357&allowPublicKeyRetrieval=true&useSSL=false";
 	private static final String CON_DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static Connection con;
 	
