@@ -28,9 +28,10 @@ public class Index {
 		setKeyword(word);
 	}
 	
-	protected void addIndex() {
-		try {new UrlConnectionService().addIndex(getUrlId(), getWordPosition(), getKeyword());}
+	protected int addIndex() {
+		try {return new UrlConnectionService().addIndex(getUrlId(), getWordPosition(), getKeyword());}
 		catch(Exception e) {e.printStackTrace();}
+        return 0;
 	}
 	
 	/**

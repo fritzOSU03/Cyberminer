@@ -33,7 +33,7 @@ public class AlphaShift {
 			//Once sorted, add each index to the database.
 			for(Index idx : this.indexes.indexes) {
 				if(!Arrays.asList(noiseWords).contains(idx.getKeyword().toLowerCase()))
-                    idx.addIndex();
+                    if(idx.addIndex() == 0) return false;
 			}
 			
 			//Clear IndexStorage once the current URL indexes are added.
